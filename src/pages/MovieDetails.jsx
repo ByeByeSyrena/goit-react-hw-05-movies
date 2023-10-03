@@ -30,9 +30,29 @@ export function MovieDetails() {
     return <p>Movie not found.</p>;
   }
 
+  const fixedDate = movie.release_date.slice(0, 4);
+  const fixedScore = Number.parseInt(movie.popularity);
+  const fixedUrl = `https://image.tmdb.org/t/p/w185${movie.poster_path}`;
+
   return (
-    <div>
-      <h2>{movie.title}</h2>
-    </div>
+    <>
+      <div>
+        <img src={fixedUrl} alt={movie.title} />
+        <h2>{movie.title}</h2>
+        <p>({fixedDate})</p>
+        <p>User score: {fixedScore}%</p>
+        <h3>Overview</h3>
+        <p>{movie.overview}</p>
+        <h3>Genres</h3>
+        <ul>
+          {movie.genres.map(genre => (
+            <li>{genre.name}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>Additional information</h2>
+      </div>
+    </>
   );
 }
