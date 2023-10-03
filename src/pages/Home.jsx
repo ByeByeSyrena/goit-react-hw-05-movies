@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { fetchTrends } from '../api/fetch-trending-now';
-
 import { Link } from 'react-router-dom';
 
 export const Home = () => {
@@ -11,7 +10,6 @@ export const Home = () => {
     const getTrendingMovies = async () => {
       try {
         setLoading(true);
-
         const data = await fetchTrends();
         setTrendingMovies(data);
       } catch (error) {
@@ -33,7 +31,7 @@ export const Home = () => {
         <ul>
           {trendingMovies.map(movie => (
             <li key={movie.id}>
-              <Link to={`${movie.id}`}>{movie.title}</Link>
+              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
             </li>
           ))}
         </ul>
