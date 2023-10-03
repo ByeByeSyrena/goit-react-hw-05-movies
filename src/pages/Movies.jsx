@@ -24,10 +24,6 @@ export const Movies = () => {
     }
   };
 
-  const reset = () => {
-    setSearchParams('');
-  };
-
   useEffect(() => {
     if (searchQuery !== '') {
       fetchMovies(searchQuery);
