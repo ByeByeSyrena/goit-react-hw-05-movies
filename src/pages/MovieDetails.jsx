@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useParams, useLocation, Outlet, Link } from 'react-router-dom';
 import { fetchMovieDetails } from '../api/fetch-movie-details';
 import { BackLink } from '../components/BackLink/BackLink';
 
-export function MovieDetails() {
+function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/movies';
+  const backLinkHref =
+    location.state?.from || (location.pathname === '/movies' ? '/movies' : '/');
 
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -73,9 +74,13 @@ export function MovieDetails() {
           </li>
         </ul>
         <div>
-          <Outlet />
+          <Suspense fallback={<div>Loading subpage...</div>}>
+            <Outlet />
+          </Suspense>
         </div>
       </div>
     </>
   );
 }
+
+export default MovieDetails;

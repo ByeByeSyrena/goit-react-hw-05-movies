@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import myImage from '../../images/logo192.png';
 
-export function Cast() {
+function Cast() {
   const [cast, setCast] = useState([]);
   const [loading, setLoading] = useState(true);
   const { movieId } = useParams();
@@ -52,3 +52,5 @@ export function Cast() {
     </>
   );
 }
+
+export default Cast;

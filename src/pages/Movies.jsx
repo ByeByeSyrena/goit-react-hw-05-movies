@@ -4,7 +4,7 @@ import { findMovies } from '../api/fetch-searching-films';
 import { SearchBar } from '../components/SearchBar/SearchBar';
 import { Link, useLocation } from 'react-router-dom';
 
-export const Movies = () => {
+const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('searchQuery') ?? '';
   const [movies, setMovies] = useState([]);
@@ -46,3 +46,5 @@ export const Movies = () => {
     </div>
   );
 };
+
+export default Movies;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchTrends } from '../api/fetch-trending-now';
 import { Link, useLocation } from 'react-router-dom';
 
-export const Home = () => {
+const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
@@ -42,3 +42,5 @@ export const Home = () => {
     </div>
   );
 };
+
+export default Home;
