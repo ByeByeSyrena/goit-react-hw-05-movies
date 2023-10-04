@@ -37,7 +37,7 @@ export function MovieDetails() {
   const { release_date, popularity, poster_path, title, overview, genres } =
     movie;
   const fixedDate = release_date.slice(0, 4);
-  const fixedScore = Number.parseInt(popularity);
+  const fixedScore = Number.parseInt(popularity / 10);
   const fixedUrl = `https://image.tmdb.org/t/p/w185${poster_path}`;
 
   return (
