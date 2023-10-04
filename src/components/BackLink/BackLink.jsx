@@ -10,10 +10,6 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   font-weight: 500;
   text-transform: uppercase;
-
-  :hover {
-    color: orangered;
-  }
 `;
 
 export const BackLink = ({ to, children }) => {

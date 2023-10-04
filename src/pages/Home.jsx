@@ -31,10 +31,10 @@ const Home = () => {
         <p>Loading...</p>
       ) : (
         <MovieList>
-          {trendingMovies.map(movie => (
-            <MovieLi key={movie.id}>
-              <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-                {movie.title}
+          {trendingMovies.map(({ id, title }) => (
+            <MovieLi key={id}>
+              <Link to={`/movies/${id}`} state={{ from: location }}>
+                {title}
               </Link>
             </MovieLi>
           ))}

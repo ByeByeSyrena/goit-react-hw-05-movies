@@ -36,10 +36,10 @@ const Movies = () => {
     <div>
       <SearchBar value={searchQuery} onSubmit={updateQueryString} />
       <MovieList>
-        {movies.map(movie => (
-          <MovieLi key={movie.id}>
-            <Link to={`${movie.id}`} state={{ from: location }}>
-              {movie.title}
+        {movies.map(({ id, title }) => (
+          <MovieLi key={id}>
+            <Link to={`${id}`} state={{ from: location }}>
+              {title}
             </Link>
           </MovieLi>
         ))}

@@ -77,8 +77,8 @@ function MovieDetails() {
           <p>{overview}</p>
           <h3>Genres</h3>
           <Genres>
-            {genres.map(genre => (
-              <GenreItem key={genre.id}>{genre.name}</GenreItem>
+            {genres.map(({ id, name }) => (
+              <GenreItem key={id}>{name}</GenreItem>
             ))}
           </Genres>
         </MovieInfo>
