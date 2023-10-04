@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, Outlet, Link } from 'react-router-dom';
 import { fetchMovieDetails } from '../api/fetch-movie-details';
+import { BackLink } from '../components/BackLink/BackLink';
 
 export function MovieDetails() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -38,8 +42,14 @@ export function MovieDetails() {
 
   return (
     <>
+      <BackLink to={backLinkHref}>Go back</BackLink>
       <div>
-        <img src={fixedUrl} alt={title} />
+        {poster_path === null ? (
+          <span>No poster</span>
+        ) : (
+          <img src={fixedUrl} alt={title} />
+        )}
+
         <h2>{title}</h2>
         <p>({fixedDate})</p>
         <p>User score: {fixedScore}%</p>
@@ -54,6 +64,17 @@ export function MovieDetails() {
       </div>
       <div>
         <h2>Additional information</h2>
+        <ul>
+          <li>
+            <Link to={`/movies/${movie.id}/cast`}>Cast</Link>
+          </li>
+          <li>
+            <Link to={`/movies/${movie.id}/reviews`}>Reviews</Link>
+          </li>
+        </ul>
+        <div>
+          <Outlet />
+        </div>
       </div>
     </>
   );

@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { findMovies } from '../api/fetch-searching-films';
 import { SearchBar } from '../components/SearchBar/SearchBar';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('searchQuery') ?? '';
   const [movies, setMovies] = useState([]);
+  const location = useLocation();
 
   const updateQueryString = name => {
     if (name === '') return;
@@ -36,7 +37,9 @@ export const Movies = () => {
       <ul>
         {movies.map(movie => (
           <li key={movie.id}>
-            <Link to={`${movie.id}`}>{movie.title}</Link>
+            <Link to={`${movie.id}`} state={{ from: location }}>
+              {movie.title}
+            </Link>
           </li>
         ))}
       </ul>
