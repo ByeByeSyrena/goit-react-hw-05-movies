@@ -33,11 +33,11 @@ function Reviews() {
 
   return (
     <>
-      <ul>
+      <ul className={css.list}>
         {reviews.map(({ id, author, content }) => (
-          <li key={id}>
-            <h4>Author: {author}</h4>
-            <p>{content}</p>
+          <li className={css.item} key={id}>
+            <h4 className={css.headlineSmall}>Author: {author}</h4>
+            <p className={css.justParagraph}>{content}</p>
           </li>
         ))}
       </ul>

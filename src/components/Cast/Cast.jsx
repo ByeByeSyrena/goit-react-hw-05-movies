@@ -34,9 +34,9 @@ function Cast() {
 
   return (
     <>
-      <ul>
+      <ul className={css.list}>
         {cast.map(({ id, name, profile_path, character }) => (
-          <li key={id}>
+          <li className={css.item} key={id}>
             {profile_path === null ? (
               <img src={myImage} alt={name} width="92" height="92" />
             ) : (
@@ -45,8 +45,8 @@ function Cast() {
                 alt={name}
               />
             )}
-            <h4>{name}</h4>
-            <p>{character}</p>
+            <h4 className={css.headlineSmall}>{name}</h4>
+            <p className={css.justParagraph}>{character}</p>
           </li>
         ))}
       </ul>

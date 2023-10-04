@@ -1,9 +1,9 @@
-ul {
+.list {
   list-style-type: none;
   padding: 0;
 }
 
-li {
+.item {
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
@@ -13,12 +13,12 @@ li {
   justify-content: center;
 }
 
-h4 {
+.headlineSmall {
   font-size: 18px;
   margin: 0;
 }
 
-p {
+.justParagraph {
   margin-top: 5px;
   font-size: 16px;
 }
