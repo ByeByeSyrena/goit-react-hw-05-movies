@@ -2,6 +2,7 @@ import { fetchMovieCast } from '../../api/fetch-movie-credits';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import myImage from '../../images/logo192.png';
+import css from './Cast.module.css';
 
 function Cast() {
   const [cast, setCast] = useState([]);
@@ -44,7 +45,7 @@ function Cast() {
                 alt={name}
               />
             )}
-            <p>{name}</p>
+            <h4>{name}</h4>
             <p>{character}</p>
           </li>
         ))}

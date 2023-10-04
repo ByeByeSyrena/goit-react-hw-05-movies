@@ -1,0 +1,18 @@
+.box {
+  padding: 0 20px 20px 20px;
+}
+
+.header {
+  padding: 20px 0 20px 20px;
+  background-color: darkgray;
+  color: black;
+  font-weight: 700;
+  -webkit-box-shadow: 0 4px 6px -6px #222;
+  -moz-box-shadow: 0 4px 6px -6px #222;
+  box-shadow: 0 4px 6px -6px #222;
+}
+
+.navigation {
+  display: flex;
+  gap: 20px;
+}

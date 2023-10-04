@@ -2,6 +2,22 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useParams, useLocation, Outlet, Link } from 'react-router-dom';
 import { fetchMovieDetails } from '../api/fetch-movie-details';
 import { BackLink } from '../components/BackLink/BackLink';
+import {
+  Container,
+  Poster,
+  MovieInfo,
+  Title,
+  Year,
+  Genres,
+  GenreItem,
+  AdditionalInfo,
+  ReviewsCastContainer,
+  GoBackLink,
+  LoadingMessage,
+  MovieNotFound,
+  AddInfo,
+} from './MovieDetails.styled';
+import { MovieList, MovieLi } from './Home.styled';
 
 function MovieDetails() {
   const { movieId } = useParams();
@@ -28,11 +44,11 @@ function MovieDetails() {
   }, [movieId]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingMessage>Loading...</LoadingMessage>;
   }
 
   if (!movie) {
-    return <p>Movie not found.</p>;
+    return <MovieNotFound>Movie not found.</MovieNotFound>;
   }
 
   const { release_date, popularity, poster_path, title, overview, genres } =
@@ -43,42 +59,48 @@ function MovieDetails() {
 
   return (
     <>
-      <BackLink to={backLinkHref}>Go back</BackLink>
-      <div>
+      <GoBackLink>
+        <BackLink to={backLinkHref}>Go back</BackLink>
+      </GoBackLink>
+      <Container>
         {poster_path === null ? (
           <span>No poster</span>
         ) : (
-          <img src={fixedUrl} alt={title} />
+          <Poster src={fixedUrl} alt={title} />
         )}
 
-        <h2>{title}</h2>
-        <p>({fixedDate})</p>
-        <p>User score: {fixedScore}%</p>
-        <h3>Overview</h3>
-        <p>{overview}</p>
-        <h3>Genres</h3>
-        <ul>
-          {genres.map(genre => (
-            <li key={genre.id}>{genre.name}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h2>Additional information</h2>
-        <ul>
-          <li>
+        <MovieInfo>
+          <Title>{title}</Title>
+          <Year>({fixedDate})</Year>
+          <p>User score: {fixedScore}%</p>
+          <h3>Overview</h3>
+          <p>{overview}</p>
+          <h3>Genres</h3>
+          <Genres>
+            {genres.map(genre => (
+              <GenreItem key={genre.id}>{genre.name}</GenreItem>
+            ))}
+          </Genres>
+        </MovieInfo>
+      </Container>
+
+      <AdditionalInfo>
+        <AddInfo>Additional information</AddInfo>
+        <MovieList>
+          <MovieLi>
             <Link to={`/movies/${movie.id}/cast`}>Cast</Link>
-          </li>
-          <li>
+          </MovieLi>
+          <MovieLi>
             <Link to={`/movies/${movie.id}/reviews`}>Reviews</Link>
-          </li>
-        </ul>
-        <div>
-          <Suspense fallback={<div>Loading subpage...</div>}>
-            <Outlet />
-          </Suspense>
-        </div>
-      </div>
+          </MovieLi>
+        </MovieList>
+      </AdditionalInfo>
+
+      <ReviewsCastContainer>
+        <Suspense fallback={<div>Loading subpage...</div>}>
+          <Outlet />
+        </Suspense>
+      </ReviewsCastContainer>
     </>
   );
 }

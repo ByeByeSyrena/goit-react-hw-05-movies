@@ -1,6 +1,7 @@
 import { fetchMovieReviews } from '../../api/fetch-movie-reviews';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import css from './Reviews.module.css';
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -26,7 +27,7 @@ function Reviews() {
     return <p>Loading...</p>;
   }
 
-  if (!reviews) {
+  if (!reviews || reviews.length === 0) {
     return <p>Reviews not found.</p>;
   }
 

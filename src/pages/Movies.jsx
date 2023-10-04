@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { findMovies } from '../api/fetch-searching-films';
 import { SearchBar } from '../components/SearchBar/SearchBar';
 import { Link, useLocation } from 'react-router-dom';
+import { MovieList, MovieLi } from './Home.styled';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,15 +35,15 @@ const Movies = () => {
   return (
     <div>
       <SearchBar value={searchQuery} onSubmit={updateQueryString} />
-      <ul>
+      <MovieList>
         {movies.map(movie => (
-          <li key={movie.id}>
+          <MovieLi key={movie.id}>
             <Link to={`${movie.id}`} state={{ from: location }}>
               {movie.title}
             </Link>
-          </li>
+          </MovieLi>
         ))}
-      </ul>
+      </MovieList>
     </div>
   );
 };

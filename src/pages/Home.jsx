@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchTrends } from '../api/fetch-trending-now';
 import { Link, useLocation } from 'react-router-dom';
+import { MovieList, MainHeadline, MovieLi } from './Home.styled';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -25,19 +26,19 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Trending today</h1>
+      <MainHeadline>Trending today</MainHeadline>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <MovieList>
           {trendingMovies.map(movie => (
-            <li key={movie.id}>
+            <MovieLi key={movie.id}>
               <Link to={`/movies/${movie.id}`} state={{ from: location }}>
                 {movie.title}
               </Link>
-            </li>
+            </MovieLi>
           ))}
-        </ul>
+        </MovieList>
       )}
     </div>
   );
