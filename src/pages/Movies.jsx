@@ -38,7 +38,15 @@ const Movies = () => {
       <MovieList>
         {movies.map(({ id, title }) => (
           <MovieLi key={id}>
-            <Link to={`${id}`} state={{ from: location }}>
+            <Link
+              to={`${id}`}
+              state={{
+                from: {
+                  pathname: `/movies`,
+                  search: `?searchQuery=${searchQuery}`,
+                },
+              }}
+            >
               {title}
             </Link>
           </MovieLi>

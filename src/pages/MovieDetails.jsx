@@ -88,10 +88,17 @@ function MovieDetails() {
         <AddInfo>Additional information</AddInfo>
         <MovieList>
           <MovieLi>
-            <Link to={`/movies/${movie.id}/cast`}>Cast</Link>
+            <Link to={`/movies/${movie.id}/cast`} state={{ from: '/movies' }}>
+              Cast
+            </Link>
           </MovieLi>
           <MovieLi>
-            <Link to={`/movies/${movie.id}/reviews`}>Reviews</Link>
+            <Link
+              to={`/movies/${movie.id}/reviews`}
+              state={{ from: '/movies' }}
+            >
+              Reviews
+            </Link>
           </MovieLi>
         </MovieList>
       </AdditionalInfo>
