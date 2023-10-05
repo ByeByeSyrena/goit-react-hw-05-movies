@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, Suspense, useRef } from 'react';
 import { useParams, useLocation, Outlet, Link } from 'react-router-dom';
 import { fetchMovieDetails } from '../api/fetch-movie-details';
 import { BackLink } from '../components/BackLink/BackLink';
@@ -25,7 +25,10 @@ function MovieDetails() {
   const [loading, setLoading] = useState(true);
 
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/movies';
+  const backLinkHref = useRef(location.state?.from ?? '/movies');
+
+  console.log(location);
+  console.log(backLinkHref);
 
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -87,17 +90,10 @@ function MovieDetails() {
         <AddInfo>Additional information</AddInfo>
         <MovieList>
           <MovieLi>
-            <Link to={`/movies/${movie.id}/cast`} state={{ from: '/movies' }}>
-              Cast
-            </Link>
+            <Link to={`cast`}>Cast</Link>
           </MovieLi>
           <MovieLi>
-            <Link
-              to={`/movies/${movie.id}/reviews`}
-              state={{ from: '/movies' }}
-            >
-              Reviews
-            </Link>
+            <Link to={`reviews`}>Reviews</Link>
           </MovieLi>
         </MovieList>
       </AdditionalInfo>

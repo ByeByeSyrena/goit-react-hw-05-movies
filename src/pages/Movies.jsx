@@ -41,10 +41,7 @@ const Movies = () => {
             <Link
               to={`${id}`}
               state={{
-                from: {
-                  pathname: `/movies`,
-                  search: `?searchQuery=${searchQuery}`,
-                },
+                from: location,
               }}
             >
               {title}

@@ -36,9 +36,7 @@ const Home = () => {
               <Link
                 to={`/movies/${id}`}
                 state={{
-                  from: {
-                    pathname: `/`,
-                  },
+                  from: location,
                 }}
               >
                 {title}
