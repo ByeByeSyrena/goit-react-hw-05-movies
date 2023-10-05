@@ -2,6 +2,8 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useParams, useLocation, Outlet, Link } from 'react-router-dom';
 import { fetchMovieDetails } from '../api/fetch-movie-details';
 import { BackLink } from '../components/BackLink/BackLink';
+import myImage from '../images/logo192.png';
+
 import {
   Container,
   Poster,
@@ -52,8 +54,10 @@ function MovieDetails() {
 
   const { release_date, popularity, poster_path, title, overview, genres } =
     movie;
-  const fixedDate = release_date.slice(0, 4);
-  const fixedScore = Number.parseInt(popularity / 10);
+  const fixedDate = release_date ? release_date.slice(0, 4) : 'In ancient ages';
+  const fixedScore = popularity
+    ? Number.parseInt(popularity / 10)
+    : 'No score yet';
   const fixedUrl = `https://image.tmdb.org/t/p/w185${poster_path}`;
 
   return (
@@ -63,7 +67,7 @@ function MovieDetails() {
       </GoBackLink>
       <Container>
         {poster_path === null ? (
-          <span>No poster</span>
+          <Poster src={myImage} alt={'here must have been a poster'} />
         ) : (
           <Poster src={fixedUrl} alt={title} />
         )}
@@ -72,14 +76,22 @@ function MovieDetails() {
           <Title>{title}</Title>
           <Year>({fixedDate})</Year>
           <p>User score: {fixedScore}%</p>
-          <h3>Overview</h3>
-          <p>{overview}</p>
-          <h3>Genres</h3>
-          <Genres>
-            {genres.map(({ id, name }) => (
-              <GenreItem key={id}>{name}</GenreItem>
-            ))}
-          </Genres>
+          {overview && (
+            <>
+              <h3>Overview</h3>
+              <p>{overview}</p>
+            </>
+          )}
+          {genres && genres.length > 0 && (
+            <>
+              <h3>Genres</h3>
+              <Genres>
+                {genres.map(({ id, name }) => (
+                  <GenreItem key={id}>{name}</GenreItem>
+                ))}
+              </Genres>
+            </>
+          )}
         </MovieInfo>
       </Container>
 
