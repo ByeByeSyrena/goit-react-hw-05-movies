@@ -25,7 +25,9 @@ function MovieDetails() {
   const [loading, setLoading] = useState(true);
 
   const location = useLocation();
-  const backLinkHref = useRef(location.state?.from ?? '/movies');
+  const backLinkHref = useRef(
+    location.state?.from || (location.pathname === '/movies' ? '/movies' : '/')
+  );
 
   console.log(location);
   console.log(backLinkHref);
@@ -90,10 +92,14 @@ function MovieDetails() {
         <AddInfo>Additional information</AddInfo>
         <MovieList>
           <MovieLi>
-            <Link to={`cast`}>Cast</Link>
+            <Link to={`cast`} state={{ from: location }}>
+              Cast
+            </Link>
           </MovieLi>
           <MovieLi>
-            <Link to={`reviews`}>Reviews</Link>
+            <Link to={`reviews`} state={{ from: location }}>
+              Reviews
+            </Link>
           </MovieLi>
         </MovieList>
       </AdditionalInfo>
