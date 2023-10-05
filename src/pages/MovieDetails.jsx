@@ -25,8 +25,7 @@ function MovieDetails() {
   const [loading, setLoading] = useState(true);
 
   const location = useLocation();
-  const backLinkHref =
-    location.state?.from || (location.pathname === '/movies' ? '/movies' : '/');
+  const backLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     const getMovieDetails = async () => {

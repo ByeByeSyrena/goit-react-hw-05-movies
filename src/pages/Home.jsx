@@ -33,7 +33,14 @@ const Home = () => {
         <MovieList>
           {trendingMovies.map(({ id, title }) => (
             <MovieLi key={id}>
-              <Link to={`/movies/${id}`} state={{ from: location }}>
+              <Link
+                to={`/movies/${id}`}
+                state={{
+                  from: {
+                    pathname: `/`,
+                  },
+                }}
+              >
                 {title}
               </Link>
             </MovieLi>
